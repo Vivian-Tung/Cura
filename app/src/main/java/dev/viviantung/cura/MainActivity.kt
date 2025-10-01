@@ -21,54 +21,41 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fragmentHome: FragmentHome
     private lateinit var fragmentDiscover: FragmentDiscover
     private lateinit var fragmentProfile: FragmentProfile
-    private lateinit var viewPager2: ViewPager2
-    private lateinit var tabLayout: TabLayout
-
-    private lateinit var myMyFragmentStateAdapter: MyFragmentStateAdapter
+    private lateinit var fragmentCalendar: FragmentCalendar
+    private lateinit var fragmentSaved: FragmentSaved
     private lateinit var fragments: ArrayList<Fragment>
-    private val tabTitles = arrayOf("Home", "Discover", "Profile") // Tab titles
-    private lateinit var tabConfigurationStrategy: TabConfigurationStrategy
-    private lateinit var tabLayoutMediator: TabLayoutMediator
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val toolbar = findViewById<Toolbar>(R.id.tool_bar)
-//        setSupportActionBar(toolbar)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-
-//        viewPager2 = findViewById(R.id.viewpager)
-//        tabLayout = findViewById(R.id.tab)
 
         fragmentHome = FragmentHome()
         fragmentDiscover = FragmentDiscover()
         fragmentProfile = FragmentProfile()
+        fragmentCalendar = FragmentCalendar()
+        fragmentSaved = FragmentSaved()
 
         fragments = ArrayList()
         fragments.add(fragmentHome)
         fragments.add(fragmentDiscover)
         fragments.add(fragmentProfile)
+        fragments.add(fragmentCalendar)
+        fragments.add(fragmentSaved)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> setCurrentFragment(fragmentHome)
                 R.id.discover -> setCurrentFragment(fragmentDiscover)
                 R.id.profile -> setCurrentFragment(fragmentProfile)
+                R.id.calendar -> setCurrentFragment(fragmentCalendar)
+                R.id.saved -> setCurrentFragment(fragmentSaved)
             }
             true
         }
-
-//        myMyFragmentStateAdapter = MyFragmentStateAdapter(this, fragments)
-//        viewPager2.adapter = myMyFragmentStateAdapter
-//
-//        tabConfigurationStrategy = TabConfigurationStrategy { tab: TabLayout.Tab, position: Int ->
-//            tab.text = tabTitles[position]
-//        }
-//        tabLayoutMediator = TabLayoutMediator(tabLayout, viewPager2, tabConfigurationStrategy)
-//        tabLayoutMediator.attach()
-//    }
     }
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
